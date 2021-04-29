@@ -7,11 +7,13 @@ from ApiResource import *
 
 #directories 
 baseDir = "C:/Users/Student/Desktop/result/backend"
+Comment.haveSecurity = ["client"]
 
 controllersDir = baseDir + "/app/Http/Controllers"
+
+Comment.controllersDir = controllersDir
+ApiResource.controllersDir = controllersDir
 routePath = baseDir + "/routes/api.php"
-
-
 routeLines = setApiFile(routePath)
 
 

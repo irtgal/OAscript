@@ -3,7 +3,6 @@ import os
 import re
 class ApiResource:
     methodTypes = {"index": "get", "create": "get", "store": "post", "show": "get", "edit": "get", "update": "patch", "destroy": "delete"}
-    controllersDir = "C:/Users/Student/Desktop/result/backend/app/Http/Controllers/"
 
     def __init__(self, path, fileName):
         self.path = path
@@ -17,7 +16,7 @@ class ApiResource:
         return f"ApiResource: {self.fileName}"
     
     def setLines(self):
-        filePath = self.controllersDir + self.fileName + ".php"
+        filePath = f"{self.controllersDir}/{self.fileName}.php"
         if (os.path.exists(filePath)):
             funcFile = open(filePath, 'r', encoding='utf-8')
             self.lines = funcFile.readlines()

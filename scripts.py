@@ -37,9 +37,9 @@ def inputParamTypes(c):
     while param != "" and pType != "":
         param = input("Set PARAMETER NAME: ")
         if param == "": break
-        description = input("Set PARAMETER TYPE: ")
+        pType = input("Set PARAMETER TYPE: ")
         if pType == "": break
-        c.parameters[param] = ["true", "query", pType]
+        c.parameters[param] = ["false", "query", pType]
         print()
     print(seperator)
 

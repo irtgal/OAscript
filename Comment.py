@@ -3,10 +3,6 @@ import os
 import ntpath
 
 class Comment:
-    controllersDir = "C:/Users/Student/Desktop/result/backend/app/Http/Controllers/"
-    haveSecurity = ["client"]
-
-
     def __init__(self, methodType, path, fileName, funcName = False):
         self.path = path
         self.methodType = methodType
@@ -36,7 +32,7 @@ class Comment:
         self.operationId = self.funcName + name
     
     def setLines(self):
-        filePath = self.controllersDir + self.fileName + ".php"
+        filePath = f"{self.controllersDir}/{self.fileName}.php"
         if (os.path.exists(filePath)):
             funcFile = open(filePath, 'r', encoding='utf-8')
             self.lines = funcFile.readlines()
@@ -53,9 +49,11 @@ class Comment:
         return ""
 
     def createHead(self):
+        
+        mType = self.methodType.title() if self.methodType else "Get"
         result = (
             "  /**\n"
-            f"\t* @OA\\{self.methodType.title() }(\n"
+            f"\t* @OA\\{mType}(\n"
             f'\t*\tpath="{self.path}",\n'
             f'\t*\toperationId="{self.operationId}",\n'
             f'\t*\tsummary="{self.summary}",\n'
@@ -102,7 +100,7 @@ class Comment:
         self.close()   
 
     def writeComment(self):
-        filePath = self.controllersDir + self.fileName + ".php"
+        filePath = f"{self.controllersDir}/{self.fileName}.php"
         if (self.lines and self.commentStr != ""):
             funcIndex = self.findFunctionIndex()
             lines = self.lines
@@ -147,7 +145,7 @@ class Comment:
                         if name in self.parameters:
                             self.parameters[name][2] = pType 
                     except Exception:
-                        raise Exception("Couldn't find parameter information")
+                        print("Couldn't find path parameter information")
                 elif re.match("[\w.,:-]+", line):
                     self.summary = line
             self.removeExistingComment()
