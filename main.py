@@ -26,6 +26,7 @@ for line in routeLines:
     resourceMatch = resourcePattern.search(line)
     if normalMatch:
         if routesCount >= startIndex:
+            print("Normal route: " + line)
             try:
                 methodType, path, fileName, funcName = normalMatch.groups()
                 c = Comment(methodType, path, fileName, funcName)
@@ -38,6 +39,7 @@ for line in routeLines:
 
     elif resourceMatch:
         if routesCount >= startIndex:
+            print("API route: " + line)
             try:
                 path, fileName = resourceMatch.groups()
                 apiresource = ApiResource(path, fileName)

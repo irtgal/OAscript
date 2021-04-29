@@ -26,8 +26,9 @@ class ApiResource:
     def findFunctions(self):
         functionNames = []
         methodTypesStr = "|".join([methodType for methodType in self.methodTypes ])
+        regex = re.compile(f"[public|private][\s]+function[\s]+({methodTypesStr})\(")
         for line in self.lines:
-            funcMatch = re.search(r"[public|private][\s]+function[\s]+(["+methodTypesStr+"]+)\(", line)
+            funcMatch = re.search(regex, line)
             if funcMatch:
                 funcName = funcMatch.group(1)
                 functionNames.append(funcName)
